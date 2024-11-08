@@ -17,6 +17,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'usuarios',
     'vagas',
+    'postagens',
     'ckeditor',
     'ckeditor_uploader',
 ]
@@ -93,7 +94,7 @@ CKEDITOR_UPLOAD_PATH = "uploads/"
 
 SECRET_KEY_JWT = "conecteElasSecretamente"
 
-ACCESS_TOKEN_EXPIRE = 1
+ACCESS_TOKEN_EXPIRE = 20
 
 REFRESH_TOKEN_EXPIRE_DAYS = 7
 

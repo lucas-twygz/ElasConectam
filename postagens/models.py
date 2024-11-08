@@ -5,8 +5,6 @@ from usuarios.models import Usuarios
 
 class Postagens(models.Model):
     mensagem = RichTextField()
-    autor = models.ForeignKey(Usuarios, on_delete=models.CASCADE)
+    autor = models.ForeignKey(Usuarios, on_delete=models.CASCADE, related_name='postagens')
     dataCriacao = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
-        return self.titulo

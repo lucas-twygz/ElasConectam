@@ -1,13 +1,13 @@
 from ninja import Router
 from typing import List
 from .models import Postagens
-from .schemas import PostagensSchema
+from .schemas import PostagensSchemaReq, PostagensSchemaRes
 from django.http import Http404
-from django.contrib.auth.models import User
+from usuarios.models import Usuarios
 
-postagem_router = Router()
+postagens_router = Router()
 
-@postagem_router.get('getTodasPostagens/', response=List[PostagensSchema])
+@postagens_router.get('getTodasPostagens/', response=List[PostagensSchemaRes])
 def todasPostagens(request):
     postagensEncontradas = Postagens.objects.all()
 
@@ -16,17 +16,21 @@ def todasPostagens(request):
     else:
         raise Http404('Não foi encontrada nenhuma postagem')
 
-@postagem_router.post('criarPostagem/')
-def criarPostagem(request, novaPostagem: PostagensSchema):
-    autor = request.user
-
-    if not autor.is_authenticated:
-        raise Http404('Usuário não autenticado.')
+@postagens_router.post('criarPostagem/')
+def criarPostagem(request, novaPostagem: PostagensSchemaReq):
+    autor = Usuarios.objects.filter(id = novaPostagem.autor_id).first()
 
     Postagens.objects.create(
-        mensagem=novaPostagem.mensagem,
-        autor=autor,
-        dataCriacao=novaPostagem.dataCriacao
+        mensagem = novaPostagem.mensagem,
+        autor = autor
     )
 
     return {'msg': 'Mensagem enviada com sucesso!'}
+
+@postagens_router.get('getPostagensDoUsuario/{usuario_id}/', response=List[PostagensSchemaRes])
+def postagensDoUsuario(request, usuario_id: int):
+    usuario = Usuarios.objects.get(id=usuario_id)
+
+    postagensUsuario = usuario.postagens.all()
+
+    return postagensUsuario

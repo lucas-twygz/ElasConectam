@@ -1,6 +1,7 @@
 from ninja import Router
 from .models import Vagas
 from .schemas import VagasSchema, RegistroVagas
+from django.http import JsonResponse
 from typing import List
 
 vagas_router = Router()
@@ -28,3 +29,11 @@ def registrarVaga(request, novaVaga: RegistroVagas):
     )
 
     return 'Vaga cadastrada com sucesso!'
+
+@vagas_router.get('getVaga/{VagaId}/', response=VagasSchema)
+def getVagaPorId(request, VagaId: int):
+    try:
+        vaga = Vagas.objects.get(id=VagaId)
+        return vaga
+    except:
+        return JsonResponse({'detail': 'Vaga não encontrada!'}, status=404)
