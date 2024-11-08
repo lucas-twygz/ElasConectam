@@ -1,4 +1,5 @@
 from pathlib import Path
+import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -7,6 +8,10 @@ SECRET_KEY = 'django-insecure-^^5ne(=$am=j2x4r=1jdl7l#69s2=^3&h!o!7+o=vz8d(ftlj(
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+MEDIA_URL = '/media/'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -18,6 +23,7 @@ INSTALLED_APPS = [
     'usuarios',
     'vagas',
     'postagens',
+    'curriculo',
     'ckeditor',
     'ckeditor_uploader',
 ]

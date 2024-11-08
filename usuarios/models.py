@@ -8,5 +8,6 @@ class Usuarios(AbstractUser):
     endereco = models.CharField(max_length=200, null=False)
     cpf = models.CharField(max_length=11, unique=True, null=False)
     cep = models.CharField(max_length=8, null=False)
+
     def __str__ (self):
         return self.first_name
