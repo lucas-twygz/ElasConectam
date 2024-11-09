@@ -6,7 +6,6 @@ from django.http import Http404, JsonResponse
 from django.conf import settings
 from django.db.models import Q
 from datetime import datetime, timedelta
-#from djangoAPI.auth import JWTAuth
 import jwt
 
 usuarios_router = Router()
@@ -50,6 +49,3 @@ def logarUsuario(request, usuarioLogando: usuarioLoginSchema):
         return {"token": token}
     else:
         raise Http404("Usuário não encontrado.")
-
-
-    
