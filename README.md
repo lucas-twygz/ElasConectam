@@ -10,7 +10,6 @@ O **Conecte Elas** é uma plataforma desenvolvida com o objetivo de apoiar mulhe
 - Natan Pucci
 - Pietra Bezerra
 - Eduarda Gomes
-- Mariana Lopes
 
 ## Funcionalidades Principais
 - **Termos de Uso**: Documentação legal e políticas de uso do site.
